@@ -18,9 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: My STAT Blog
+title: My STAT 386 Blog
 email: nl239@byu.edu 
-description: "A blog I'm maing for my STAT 386 class at BYU" 
+description: "A blog I'm making for my Data Science Process class at BYU" 
 baseurl:
 url: "https://natelewis17.github.io" #  change this to "https://<your-github-username>.github.io"
 image: https://source.unsplash.com/random
