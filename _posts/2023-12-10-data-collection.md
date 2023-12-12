@@ -139,6 +139,7 @@ Okay so now I have a big long list of a couple thousand chinese characters, but 
 * Newspaper Ranking
 * Novel Ranking (the importance of the newspaper and novel ranking will be explored more deeply in the EDA blog post)
 Due to the limit on this API of 1000 queries per hour I had to create 3 different DataFrames containing this new data which I then merged together. The code for creating the first of these three can be seen below:
+
 ```python
 url = "https://japanese-text-analysis.p.rapidapi.com/"
 
