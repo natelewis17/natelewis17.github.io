@@ -170,7 +170,7 @@ for kanji in kanji_list:
     payload = {
         "query": f"""
             query MyQuery {{
-                kanji(literal: "{kanji}") {{
+                kanji {{
                     literal
                     frequency
                     grade
