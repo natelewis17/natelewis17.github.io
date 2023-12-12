@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Wikiji: EDA"
+title:  "Wikiji: Data Collection"
 author: Nate Lewis
 description: How frequent are various Kanji on Wikipedia?
-image: /assets/images/jp_landscape.jpg
+image: /assets/images/jp_writing.jpg
 ---
 
 # Introduction
