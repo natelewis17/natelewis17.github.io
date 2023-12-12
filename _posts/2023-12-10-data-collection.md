@@ -18,7 +18,7 @@ Data collection was done using the [MediaWiki API](https://www.mediawiki.org/wik
 
 The first step was to create a function that using the WikiMedia API would select a random page from Japanese Wikipedia and then scrape specifically the kanji text of the page. This was done using the following code:
 
-```
+```python
 def get_random_wikipedia_kanji():
     # Wikipedia API endpoint for a random page
     api_url = 'https://ja.wikipedia.org/w/api.php?action=query&list=random&rnlimit=1&format=json'
@@ -49,7 +49,7 @@ def get_random_wikipedia_kanji():
 
 After creating the function, I then needed to create a for loop so that I could get text data from multiple pages in quick succession. I decided that [343](https://www.youtube.com/watch?v=0jXTBAGv9ZQ) iterations would be sufficient for getting an idea of frequency. The code for the for loop is below:
 
-```
+```python
 # Number of iterations
 num_iterations = 343
 
@@ -66,7 +66,7 @@ for _ in range(num_iterations):
 
 I then created a DataFrame using the following code:
 
-```
+```python
 # Create a dictionary to store the frequency of each kanji character
 kanji_frequency_dict = {}
 
@@ -86,7 +86,7 @@ kanji_frequency_df = kanji_frequency_df.reset_index(drop=True)
 
 As previously mentioned a person wanting to achieve "fluency" in Japanese needs to learn over 2,000 kanji. This number of 2,000 (or more specifically 2,136) comes from the joyo kanji guide created by the Japanese Ministry of Education. I decided that as interesting for a learner as what are the most common kanji is the question of which of the "essential" kanji don't appear at all. Thus I decided to farther add onto my DataFrame all of the kanji from the joyo list that didn't appear at all on the 343 Wikipedia pages, and to do so I again went to Wikipedia and their [list of joyo kanji](https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji). The following code was used to create a new DataFrame and then merge the two DataFrames together:
 
-```
+```python
 # Wikipedia URL for the Joyo kanji list
 url = "https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji"
 
