@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Heat Maps for Dummies (or Smart People who Don't Know About Heat Maps)"
+title:  "Wikiji: Data Collection"
 author: Nate Lewis
 description: A brief tutorial on how to create heat maps with Python
-image: /assets/images/seasons.jpg
+image: /assets/images/jp_landscape.jpg
 ---
 
-# Why Do Heat Maps Matter?
+# Introduction
 
 A heat map is a representation of data where individual values are represented as colors,
 where each cell's color represents a specific value, allowing patterns or trends to be identified intuitively and easily.
