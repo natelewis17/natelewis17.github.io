@@ -12,7 +12,7 @@ Japanese is widely considered to have one of the most complex writing systems wi
 
 The most obvious answer to this question is to start with the most common and therefore the most essential ones. But how does one know which are most common and is the even the best way to learn? My goal with this project is to help answer these questions by looking at the frequency of kanji usage on the website Wikipedia.com.
 
-Data collection was done using the [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page) with special consideration given to the provided API Etiquette and Usage Guidelines. Additionally, I used the [Japanese Text Analysis API](https://rapidapi.com/rlemaigre/api/japanese-text-analysis). This API required an API key so I had to ensure not to include the key on any publically available page. For usage of both APIs I included a delay in my code to make sure that too many requests were not being made.
+Data collection was done using the [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page) with special consideration given to the provided API Etiquette and Usage Guidelines. I needed this API in order to get the text data needed to examine the frequency of Kanji on WIkipedia. Additionally, I used the [Japanese Text Analysis API](https://rapidapi.com/rlemaigre/api/japanese-text-analysis). I used this API to determine the frequency of kanji across different sources and to see other basic facts about the various kanji such as the Egnlish meaning and greade level. This API required an API key so I had to ensure not to include the key on any publically available page. For usage of both APIs I included a delay in my code to make sure that too many requests were not being made.
 
 <h2>Collecting the Data</h2>
 
@@ -84,7 +84,7 @@ kanji_frequency_df = kanji_frequency_df.reset_index(drop=True)
 
 <h2>To Be or Not to Be (Joyo)</h2>
 
-As previously mentioned a person wanting to achieve "fluency" in Japanese needs to learn over 2,000 kanji. This number of 2,000 (or more specifically 2,136) comes from the joyo kanji guide created by the Japanese Ministry of Education. I decided that as interesting for a learner as what are the most common kanji is the question of which of the "essential" kanji don't appear at all. Thus I decided to farther add onto my DataFrame all of the kanji from the joyo list that didn't appear at all on the 343 Wikipedia pages, and to do so I again went to Wikipedia and their [list of joyo kanji](https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji). The following code was used to create a new DataFrame and then merge the two DataFrames together:
+As previously mentioned a person wanting to achieve "fluency" in Japanese needs to learn over 2,000 kanji. This number of 2,000 (or more specifically 2,136) comes from the joyo kanji guide created by the Japanese Ministry of Education. I think that for a learner it is helpful to know which kanji on this list are rare enough that they don't appear at all in 343 Wikipedia articles. Thus I decided to further add onto my DataFrame all of the kanji from the joyo list that didn't appear at all on the 343 Wikipedia pages, and to do so I again went to Wikipedia and their [list of joyo kanji](https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji). The following code was used to create a new DataFrame and then merge the two DataFrames together:
 
 ```python
 # Wikipedia URL for the Joyo kanji list
@@ -130,12 +130,12 @@ I also decided to add a column called "In_Joyo." This column simply reports whet
 
 <h2>What Do They Mean?</h2>
 
-Okay so now I have a big long list of a couple thousand chinese characters, but how are we supposed to get anything from this list if we don't even have data on basic info about the kanji like their stroke counts or even what they mean in English. This is when the Japanese Text Analysis API became important. Using this API I was able to create new columns for my DataFrame that would be essential to making the data meaningful for a nonfluent learner and for answering my questions when it came time for EDA. Using this API I was able to create new columns pertaining to:
+Okay so now I have a big long list of a couple thousand chinese characters, but how are we supposed to get anything from this list if we don't even have data on basic info about the kanji like their stroke counts or even what they mean in English? This is when the Japanese Text Analysis API became important. Using this API I was able to create new columns for my DataFrame that would be essential to making the data meaningful for a nonfluent learner and for answering my questions when it came time for EDA. Using this API I was able to create new columns pertaining to:
 * English Meanings of the Concepts the Kanji Represent
 * Stroke Count
 * Grade at Which Kanji is Taught to Japanese Students
 * JLPT Level (JLPT is a series of 5 exams for foreigners to certify competency in Japanese)
-* Radicals (Radicals are the building blocks of kanji. For example 時、待、持 all share the 寺 radical).
+* Radicals (Radicals are the building blocks of kanji. For example 時、待、持 all share the 寺 radical)
 * Newspaper Ranking
 * Novel Ranking (the importance of the newspaper and novel ranking will be explored more deeply in the EDA blog post)
 Due to the limit on this API of 1000 queries per hour I had to create 3 different DataFrames containing this new data which I then merged together. The code for creating the first of these three can be seen below:
@@ -218,7 +218,7 @@ top_df = pd.DataFrame({
 })
 ```
 
-I then concatenate these three DataFrames and the immediately merged the result with my existing DataFrame containing the data I got from Wikipedia like this:
+I then concatenate these three DataFrames and then immediately merged the result with my existing DataFrame containing the data I got from Wikipedia like this:
 
 ```python
 # Concatenate the DataFrames along the rows
@@ -232,5 +232,5 @@ kanji_df = pd.merge(kanji_frequency_df, kanji_data_df, on="Kanji", how="left", s
 
 The final result after all of that work is a DataFrame with 2519 rows and 11 columns. The code provided above is a simplified version of my code used to create my DataFrame so if you would like to see all of the code used or the .csv file I made you can find that in my GitHub repository [here](https://github.com/natelewis17/STAT386_Project).
 
-Thank you for reading through my blog post. Even if you are not interested in learning Japanese at all, I hope you got something of this post. I'd like to finish by encouraging all future statisticians to work with data that pertains to their interests and also a reminder to always be ethical when web scraping.
+Thank you for reading through my blog post. Even if you are not interested in learning Japanese at all, I hope you got something of this post. If you have any thoughts to questions regarding this post or this project in general feel free to contact me. I'd like to finish by encouraging all future statisticians to work with data that pertains to their interests and also a reminder to always be ethical when web scraping.
 さよなら兄弟!
